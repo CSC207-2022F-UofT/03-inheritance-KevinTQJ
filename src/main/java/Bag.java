@@ -74,11 +74,13 @@ public abstract class Bag {
      *       This method should return true if the item was added
      *       and false otherwise.
      */
-    public void addItem(String item) {
+    public Boolean addItem(String item) {
         if (numberOfContents < capacity) {
-            contents[numberOfContents - 1] = item;
-            numberOfContents--;
+            contents[numberOfContents] = item;
+            numberOfContents++;
+            return true;
         }
+        return false;
     }
 
     /**
@@ -93,8 +95,10 @@ public abstract class Bag {
      */
 
     public String popItem() {
+        String item = contents[numberOfContents - 1];
+        contents[numberOfContents - 1] = null;
         numberOfContents--;
-        return contents.pop();
+        return item;
     }
 
     /**
@@ -103,8 +107,7 @@ public abstract class Bag {
      * @param n the amount to increase this Bag's capacity by
      */
     public void increaseCapacity(int n) {
-        capacity += n;
-
+        this.capacity += n;
     }
 
     /**
